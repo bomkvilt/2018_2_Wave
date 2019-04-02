@@ -1,0 +1,8 @@
+{
+    "root": ".",
+    "log": ".runtime/logs/landing.log",
+    "configs": {
+        "cors": "cors.json",
+        "auth": "auth.json"
+    }
+}

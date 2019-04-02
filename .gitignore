@@ -1,0 +1,7 @@
+# 'hidden' directories
+.*/
+
+# golang by generated files
+go.sum
+Debug
+debug

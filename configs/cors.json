@@ -1,0 +1,14 @@
+{
+    "origins": [
+        "http://localhost:8082"
+    ],
+    "optionsPass" : true,
+    "credentials" : true,
+    "methods": [
+        "OPTIONS",
+        "DELETE",
+        "POST",
+        "PUT",
+        "GET"
+    ]
+}
