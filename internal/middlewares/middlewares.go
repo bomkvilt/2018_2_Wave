@@ -2,7 +2,7 @@ package middlewares
 
 import "net/http"
 
-//go:generate easyjson -output_filename jsons.go .
+//go:generate easyjson -output_filename jsons.gen.go .
 
 // IMiddleware - middleware inteface
 type IMiddleware func(http.HandlerFunc) http.HandlerFunc

@@ -2,7 +2,7 @@ package service
 
 import "github.com/hashicorp/go-multierror"
 
-//~~~~~~~~~~~~~~~~~~~~~~| IError
+//~~~~~~~~~~~~~~~~~~~~~~| Error
 
 // Error - wrap @err and append @errs to the wrapper
 func Error(err error, errs ...error) error {
@@ -20,4 +20,10 @@ func GetErrors(err error) []error {
 // Panic - invore panic with result of an @Error() function
 func Panic(err error, errs ...error) {
 	panic(Error(err, errs...))
+}
+
+func PanicIf(err error, errs ...error) {
+	if err != nil {
+		Panic(err, errs...)
+	}
 }

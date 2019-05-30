@@ -17,7 +17,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson18c96a5eDecodeWaveInternalMiddlewares(in *jlexer.Lexer, out *corsConfig) {
+func easyjson5822a332DecodeWaveInternalMiddlewares(in *jlexer.Lexer, out *corsConfig) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -119,7 +119,7 @@ func easyjson18c96a5eDecodeWaveInternalMiddlewares(in *jlexer.Lexer, out *corsCo
 		in.Consumed()
 	}
 }
-func easyjson18c96a5eEncodeWaveInternalMiddlewares(out *jwriter.Writer, in corsConfig) {
+func easyjson5822a332EncodeWaveInternalMiddlewares(out *jwriter.Writer, in corsConfig) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -212,27 +212,27 @@ func easyjson18c96a5eEncodeWaveInternalMiddlewares(out *jwriter.Writer, in corsC
 // MarshalJSON supports json.Marshaler interface
 func (v corsConfig) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson18c96a5eEncodeWaveInternalMiddlewares(&w, v)
+	easyjson5822a332EncodeWaveInternalMiddlewares(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v corsConfig) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson18c96a5eEncodeWaveInternalMiddlewares(w, v)
+	easyjson5822a332EncodeWaveInternalMiddlewares(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *corsConfig) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson18c96a5eDecodeWaveInternalMiddlewares(&r, v)
+	easyjson5822a332DecodeWaveInternalMiddlewares(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *corsConfig) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson18c96a5eDecodeWaveInternalMiddlewares(l, v)
+	easyjson5822a332DecodeWaveInternalMiddlewares(l, v)
 }
-func easyjson18c96a5eDecodeWaveInternalMiddlewares1(in *jlexer.Lexer, out *authConfig) {
+func easyjson5822a332DecodeWaveInternalMiddlewares1(in *jlexer.Lexer, out *authConfig) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -263,7 +263,7 @@ func easyjson18c96a5eDecodeWaveInternalMiddlewares1(in *jlexer.Lexer, out *authC
 		in.Consumed()
 	}
 }
-func easyjson18c96a5eEncodeWaveInternalMiddlewares1(out *jwriter.Writer, in authConfig) {
+func easyjson5822a332EncodeWaveInternalMiddlewares1(out *jwriter.Writer, in authConfig) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -283,23 +283,23 @@ func easyjson18c96a5eEncodeWaveInternalMiddlewares1(out *jwriter.Writer, in auth
 // MarshalJSON supports json.Marshaler interface
 func (v authConfig) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson18c96a5eEncodeWaveInternalMiddlewares1(&w, v)
+	easyjson5822a332EncodeWaveInternalMiddlewares1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v authConfig) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson18c96a5eEncodeWaveInternalMiddlewares1(w, v)
+	easyjson5822a332EncodeWaveInternalMiddlewares1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *authConfig) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson18c96a5eDecodeWaveInternalMiddlewares1(&r, v)
+	easyjson5822a332DecodeWaveInternalMiddlewares1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *authConfig) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson18c96a5eDecodeWaveInternalMiddlewares1(l, v)
+	easyjson5822a332DecodeWaveInternalMiddlewares1(l, v)
 }

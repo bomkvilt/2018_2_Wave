@@ -1,0 +1,197 @@
+{
+  "@types": { 
+    "******": "Structs or 'macro' deffinitions to prevent usless ^c^v",
+    "@User": {
+      "name": ""
+    },
+    "@App": {
+      "id"        : 0,
+      "name"      : "",
+      "installs"  : "",
+      "tumbnail"  : "",
+      "bInstalled": true
+    },
+    "@Category": {
+      "name"  : "",
+      "items" : 0
+    }
+  },
+  "users": { 
+    "******": "User and session handlers",
+    "requests": [
+      {
+        "******": "Create a new user",
+        "method": "PUT", "url": "/users",
+        "body": {
+          "name"    : "", 
+          "password": ""
+        },
+        "responses": [
+          { "code": 200 },
+          { "code": 403 }
+        ]
+      },
+      {
+        "******": "Get a user's accaunt",
+        "method": "GET", "url":  "/users/{name}",
+        "required": [ "auth" ],
+        "responses": [
+          { 
+            "code": 200,
+            "body": "@User"
+          },
+          { "code": 401 },
+          { "code": 403 },
+          { "code": 404 }
+        ]
+      },
+      {
+        "******": "Get a current user's accaunt",
+        "method": "GET", "url":  "/users/me",
+        "required": [ "auth" ],
+        "responses": [
+          { 
+            "code": 200,
+            "body": "@User"
+          },
+          { "code": 401 },
+          { "code": 403 }
+        ]
+      },
+      {
+        "******": "Update a current user's accaunt",
+        "method": "PATCH", "url":  "/users/me",
+        "required": [ "auth" ],
+        "body": {
+          "password": ""
+        },
+        "responses": [
+          { "code": 200 },
+          { "code": 401 },
+          { "code": 403 }
+        ]
+      },
+      {
+        "******": "Log into an existing accaunt",
+        "method": "PUT", "url": "/users/me/seesions",
+        "body": {
+          "name": "",
+          "password": ""
+        },
+        "responses": [
+          { "code": 200 },
+          { "code": 403 }
+        ]
+      },
+      {
+        "******": "Log out from an existing accaunt",
+        "method": "DELETE", "url": "/users/me/seesions",
+        "required": [ "auth" ],
+        "responses": [
+          { "code": 200 },
+          { "code": 401 }
+        ]
+      }
+    ]
+  },
+  "applications": {
+    "******": "Application handlers",
+    "required": [ "auth" ],
+    "requests": [
+      {
+        "******": "List of applications",
+        "method": "GET", "url": "/apps/",
+        "responses": [
+          {
+            "code": 200,
+            "body": [ "@App" ]
+          },
+          { "code": 401 },
+          { "code": 403 }
+        ]
+      },
+      {
+        "******": "Application info",
+        "method": "GET", "url": "/apps/{name}",
+        "responses": [
+          {
+            "code": 200,
+            "body": "@App"
+          },
+          { "code": 401 },
+          { "code": 403 },
+          { "code": 404 }
+        ]
+      },
+      {
+        "******": "List of categories",
+        "method": "GET", "url":"/apps/categories/",
+        "responses":[
+          {
+            "code": 200,
+            "body": [ "@Category" ]
+          },
+          { "code": 401 },
+          { "code": 403 }
+        ]
+      },
+      {
+        "******": "In category applications",
+        "method": "GET", "url":"/apps/categories/{name}",
+        "responses":[
+          {
+            "code": 200,
+            "body": [ "@App" ]
+          },
+          { "code": 401 },
+          { "code": 403 },
+          { "code": 404 }
+        ]
+      },
+      {
+        "******": "List of current user's apps",
+        "method": "GET", "url":"/apps/my/",
+        "responses": [
+          {
+            "code": 200,
+            "body": [ "@App" ]
+          },
+          { "code": 401 },
+          { "code": 403 }
+        ]
+      },
+      {
+        "******": "Add the app to current user's apps",
+        "method": "PUT", "url":"/apps/my/{id}",
+        "responses": [
+          { "code": 200 },
+          { "code": 401 },
+          { "code": 403 }
+        ]
+      },
+      {
+        "******": "Remove the app to current user's apps",
+        "method": "DELETE", "url":"/apps/my/{id}",
+        "responses": [
+          { "code": 200 },
+          { "code": 401 },
+          { "code": 403 }
+        ]
+      }
+    ]
+  },
+  "service": {
+    "required": [ "auth", "admin" ],
+    "requests": [
+      {
+        "method": "GET", "url": "/metrics",
+        "responses": [
+          {
+            "code": 200,
+            "body": "//TODO"
+          }
+        ]
+      }
+    ]
+  }
+}

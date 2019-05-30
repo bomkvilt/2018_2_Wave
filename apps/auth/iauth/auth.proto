@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package iauth;
+
+// User credentionals
+message User {
+	string username = 1;
+	string password = 2;
+};
+
+// Default status message
+message Status {
+	bool  bOK = 1; //!< Request status
+	int64 uid = 2; //!< User id
+}
+
+// Cookie
+message Cookie {
+	string cookie = 1; //!< OAuth token string
+	Status status = 2; //!< Request status
+}
+
+
+// Authoriasion service
+service IAuth {
+	rpc CreateAccaunt(User) returns(Cookie) {} //!< Create a new account with the credentionals | Note: doesn't log in automatically
+	rpc LogIn(User) 		returns(Cookie) {} //!< Log in by using of the credentionals | Note: on error bOK=false
+	rpc LogOut(Cookie)		returns(Status) {} //!< Log out from the session | Note: if the session was removed bOK=true 
+	rpc IsLoggedIn(Cookie)	returns(Status) {} //!< Checks whether the cookies represents a valid session
+}

@@ -17,7 +17,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson18c96a5eDecodeWaveInternalService(in *jlexer.Lexer, out *FServiceConfig) {
+func easyjson5822a332DecodeWaveInternalService(in *jlexer.Lexer, out *FServiceConfig) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -70,7 +70,7 @@ func easyjson18c96a5eDecodeWaveInternalService(in *jlexer.Lexer, out *FServiceCo
 		in.Consumed()
 	}
 }
-func easyjson18c96a5eEncodeWaveInternalService(out *jwriter.Writer, in FServiceConfig) {
+func easyjson5822a332EncodeWaveInternalService(out *jwriter.Writer, in FServiceConfig) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -126,23 +126,23 @@ func easyjson18c96a5eEncodeWaveInternalService(out *jwriter.Writer, in FServiceC
 // MarshalJSON supports json.Marshaler interface
 func (v FServiceConfig) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson18c96a5eEncodeWaveInternalService(&w, v)
+	easyjson5822a332EncodeWaveInternalService(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v FServiceConfig) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson18c96a5eEncodeWaveInternalService(w, v)
+	easyjson5822a332EncodeWaveInternalService(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *FServiceConfig) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson18c96a5eDecodeWaveInternalService(&r, v)
+	easyjson5822a332DecodeWaveInternalService(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *FServiceConfig) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson18c96a5eDecodeWaveInternalService(l, v)
+	easyjson5822a332DecodeWaveInternalService(l, v)
 }

@@ -6,6 +6,8 @@ import (
 	"path"
 )
 
+//~~~~~~~~~~~~~~~~~~~~~~| FServerConfig
+
 // FServiceConfig - server configuration
 // easyjson:json
 type FServiceConfig struct {

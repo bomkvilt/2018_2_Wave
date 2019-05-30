@@ -1,0 +1,7 @@
+{
+    "root": ".",
+    "log": ".runtime/logs/ms_auth.log",
+    "configs": {
+        "auth": "auth.json"
+    }
+}

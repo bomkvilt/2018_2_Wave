@@ -1,0 +1,11 @@
+[
+    { "****": "This file rigister application should be build; If you wanna exclude one - remove it from the list" },
+    {
+        "****": "authorisation service",
+        "name": "auth"
+    },
+    {
+        "****": "platform microservice",
+        "name": "platform"
+    }
+]

@@ -7,7 +7,7 @@ import (
 	"path"
 )
 
-//go:generate easyjson -output_filename jsons.go .
+//go:generate easyjson -output_filename jsons.gen.go .
 
 //~~~~~~~~~~~~~~~~~~~~~~| IService
 

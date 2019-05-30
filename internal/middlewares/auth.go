@@ -10,7 +10,7 @@ type authConfig struct {
 	Adress string `json:"adress"`
 }
 
-// Auth - autorisation check middleware
+// Auth - authorisation check middleware
 func Auth(sv service.IService) IMiddleware {
 	return func(next http.HandlerFunc) http.HandlerFunc {
 		return func(w http.ResponseWriter, r *http.Request) {
