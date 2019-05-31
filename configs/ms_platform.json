@@ -3,6 +3,7 @@
     "log": ".runtime/logs/landing.log",
     "configs": {
         "cors": "cors.json",
-        "auth": "auth.json"
+        "auth": "auth.json",
+        "platform": "platform.json"
     }
 }

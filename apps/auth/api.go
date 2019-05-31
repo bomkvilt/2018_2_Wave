@@ -7,7 +7,7 @@ import (
 )
 
 //go:generate protoc --go_out=plugins=grpc:. ./iauth/auth.proto
-//go:generate easyjson -output_filename jsons.go .
+//go:generate easyjson -output_filename jsons.gen.go .
 
 // --------------------------| authService
 
@@ -20,7 +20,7 @@ type IAuthServer interface {
 
 type authService struct {
 	service.IService
-	cf config
+	cf Config
 	db *db
 }
 
@@ -84,3 +84,11 @@ func (au *authService) IsLoggedIn(_ context.Context, c *iauth.Cookie) (*iauth.St
 		Uid: uid,
 	}, nil
 }
+
+// --------------------------|
+
+var (
+	statusOK   = &iauth.Status{BOK: true}
+	statusFail = &iauth.Status{BOK: false}
+	cookieFail = &iauth.Cookie{Status: statusFail}
+)

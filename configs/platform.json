@@ -1,0 +1,10 @@
+{
+    "db": {
+        "host": "127.0.0.1",
+        "port": 5432,
+        "user": "wave",
+        "password": "wave",
+        "database": "wave_platform"
+    },
+    "port": ":6601"
+}

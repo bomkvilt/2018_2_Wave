@@ -1,18 +1,43 @@
-package auth
+package cookies
 
 import (
 	"math/rand"
+	"net/http"
 	"time"
-	"wave/apps/auth/iauth"
 )
 
-var (
-	statusOK   = &iauth.Status{BOK: true}
-	statusFail = &iauth.Status{BOK: false}
-	cookieFail = &iauth.Cookie{Status: statusFail}
+const (
+	cookieStringLenght    = 64
+	sessionCookieLifeTime = 60 * 24 * 365
+	sessionCookieName     = "session"
 )
 
-func randString(n int) string {
+func GenerateCookie() string {
+	return RandString(cookieStringLenght)
+}
+
+func MakeSessionCookie(value string) *http.Cookie {
+	loginCookie := &http.Cookie{}
+	loginCookie.MaxAge = sessionCookieLifeTime
+	loginCookie.Name = sessionCookieName
+	loginCookie.Value = value
+	loginCookie.Path = ""
+	return loginCookie
+}
+
+func GetSessionCookie(r *http.Request) string {
+	session, err := r.Cookie(sessionCookieName)
+	if err != nil || session == nil {
+		return ""
+	}
+	return session.Value
+}
+
+func SetCookie(w http.ResponseWriter, cookie *http.Cookie) {
+	http.SetCookie(w, cookie)
+}
+
+func RandString(n int) string {
 	const (
 		letterBytes   = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		letterIdxBits = 6                    // 6 bits to represent a letter index

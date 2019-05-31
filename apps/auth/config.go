@@ -1,9 +1,7 @@
 package auth
 
-//~~~~~~~~~~~~~~~~~~~~~~| config
-
 // easyjson:json
-type config struct {
+type Config struct {
 	DB   configDB `json:"db"`
 	Port string   `json:"port"`
 }

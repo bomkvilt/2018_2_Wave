@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	ap "wave/apps/platform"
 	mw "wave/internal/middlewares"
 	sv "wave/internal/service"
 
@@ -10,12 +11,19 @@ import (
 )
 
 func main() {
-	var (
-		c = sv.LoadConfig("configs/landing.json")
-		s = sv.NewService(c)
-		h = func(w http.ResponseWriter, r *http.Request) { w.Write([]byte("gg wp, mafaker!")) }
+	var ( // common
+		c = sv.LoadConfig("configs/ms_platform.json")
+		s = ap.NewAPI(c)
 		r = mux.NewRouter()
+		p = s.GetPort()
 	)
-	r.HandleFunc("/", mw.Pipe(h, mw.Cors(s)))
-	http.ListenAndServe(":8080", r)
+	var ( // middlewares
+		cors = mw.Cors(s)
+	)
+
+	r.HandleFunc("/users", mw.Pipe(s.SugnUp, cors)).Methods("POST")
+	r.HandleFunc("/users/me", mw.Pipe(s.MyProfile, cors)).Methods("GET")
+	r.HandleFunc("/session", mw.Pipe(s.LogIn, cors)).Methods("POST")
+	s.Logger().Infof("platform server has been started on a port %s", p)
+	http.ListenAndServe(p, r)
 }
