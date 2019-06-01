@@ -27,4 +27,5 @@ service IAuth {
 	rpc LogIn(User) 		returns(Cookie) {} //!< Log in by using of the credentionals | Note: on error bOK=false
 	rpc LogOut(Cookie)		returns(Status) {} //!< Log out from the session | Note: if the session was removed bOK=true 
 	rpc IsLoggedIn(Cookie)	returns(Status) {} //!< Checks whether the cookies represents a valid session
+	rpc IsAdmin(Cookie)		returns(Status)	{} //!< Is the user an administration
 }

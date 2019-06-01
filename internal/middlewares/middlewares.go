@@ -14,3 +14,13 @@ func Pipe(handler http.HandlerFunc, middlewares ...IMiddleware) http.HandlerFunc
 	}
 	return handler
 }
+
+// Combine - combines several middlewares to one
+func Combine(middlewares ...IMiddleware) IMiddleware {
+	return func(next http.HandlerFunc) http.HandlerFunc {
+		for _, mw := range middlewares {
+			next = mw(next)
+		}
+		return next
+	}
+}

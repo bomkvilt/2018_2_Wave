@@ -107,3 +107,13 @@ func (db db) GetSession(cookie string) (uid int64, err error) {
 	}
 	return uid, nil
 }
+
+func (db db) IsAdmin(cookie string) (ok bool, err error) {
+	db.QueryRow(`
+		SELECT count(uid)>0
+			FROM admins
+			JOIN session USING(uid)
+			WHERE cookie=$1
+	`, cookie).Scan(&ok)
+	return ok, err
+}

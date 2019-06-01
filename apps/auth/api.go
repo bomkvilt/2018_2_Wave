@@ -85,6 +85,14 @@ func (au *authService) IsLoggedIn(_ context.Context, c *iauth.Cookie) (*iauth.St
 	}, nil
 }
 
+func (au *authService) IsAdmin(_ context.Context, c *iauth.Cookie) (*iauth.Status, error) {
+	ok, err := au.db.IsAdmin(c.Cookie)
+	if err != nil || !ok {
+		return statusFail, nil
+	}
+	return statusOK, nil
+}
+
 // --------------------------|
 
 var (

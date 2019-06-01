@@ -2,9 +2,7 @@ package platform
 
 import (
 	"net/http"
-	"wave/apps/auth/iauth"
 	"wave/apps/platform/models"
-	"wave/internal/cookies"
 
 	"github.com/gorilla/mux"
 )
@@ -56,16 +54,7 @@ func (ap API) GetAppCategories(rw http.ResponseWriter, r *http.Request) {
 }
 
 func (ap API) GetMyApps(rw http.ResponseWriter, r *http.Request) {
-	cookie := cookies.GetSessionCookie(r)
-	status, err := ap.authMs.IsLoggedIn(r.Context(), &iauth.Cookie{
-		Cookie: cookie,
-	})
-	if err != nil || !status.BOK {
-		rw.WriteHeader(http.StatusForbidden)
-		return
-	}
-
-	apps, err := ap.db.GetUserApps(status.Uid)
+	apps, err := ap.db.GetUserApps(ap.getUID(r))
 	if err != nil {
 		ap.Logger().Errorf("unable to get apps: %s", err.Error())
 		rw.WriteHeader(http.StatusForbidden)
@@ -84,16 +73,7 @@ func (ap API) GetMyApps(rw http.ResponseWriter, r *http.Request) {
 
 func (ap API) AddMyApp(rw http.ResponseWriter, r *http.Request) {
 	appName := r.FormValue("name")
-	cookie := cookies.GetSessionCookie(r)
-	status, err := ap.authMs.IsLoggedIn(r.Context(), &iauth.Cookie{
-		Cookie: cookie,
-	})
-	if err != nil || !status.BOK {
-		rw.WriteHeader(http.StatusForbidden)
-		return
-	}
-
-	if err := ap.db.AddMyApp(status.Uid, appName); err != nil {
+	if err := ap.db.AddMyApp(ap.getUID(r), appName); err != nil {
 		rw.WriteHeader(http.StatusForbidden)
 		return
 	}

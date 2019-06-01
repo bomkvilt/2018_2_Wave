@@ -16,3 +16,12 @@ CREATE TABLE sessions
 
     FOREIGN KEY (uid) REFERENCES users(uid)
 );
+
+-----------------------------| admins |-----------------------------
+DROP TABLE IF EXISTS admins;
+CREATE TABLE admins
+(
+    uid         PRIMARY KEY,
+
+    FOREIGN KEY (uid) REFERENCES users(uid)
+);

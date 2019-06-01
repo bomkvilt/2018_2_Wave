@@ -16,7 +16,8 @@ func (ap API) SugnUp(rw http.ResponseWriter, r *http.Request) {
 		}
 		password = r.FormValue("password")
 	)
-	cookie, err := ap.authMs.CreateAccaunt(r.Context(), &iauth.User{
+
+	cookie, err := ap.getAuth(r).CreateAccaunt(r.Context(), &iauth.User{
 		Username: user.Username,
 		Password: password,
 	})
@@ -31,7 +32,6 @@ func (ap API) SugnUp(rw http.ResponseWriter, r *http.Request) {
 			ap.Logger().Errorf("Error during user creation: %s", err.Error())
 			service.Panic(err)
 		}
-
 		session := cookies.MakeSessionCookie(cookie.Cookie)
 		cookies.SetCookie(rw, session)
 		rw.WriteHeader(http.StatusOK)
@@ -45,7 +45,7 @@ func (ap API) LogIn(rw http.ResponseWriter, r *http.Request) {
 		username = r.FormValue("username")
 		password = r.FormValue("password")
 	)
-	cookie, err := ap.authMs.LogIn(r.Context(), &iauth.User{
+	cookie, err := ap.getAuth(r).LogIn(r.Context(), &iauth.User{
 		Username: username,
 		Password: password,
 	})
@@ -65,9 +65,7 @@ func (ap API) LogIn(rw http.ResponseWriter, r *http.Request) {
 
 func (ap API) LogOut(rw http.ResponseWriter, r *http.Request) {
 	cookie := cookies.GetSessionCookie(r)
-	_, err := ap.authMs.LogOut(r.Context(), &iauth.Cookie{
-		Cookie: cookie,
-	})
+	_, err := ap.getAuth(r).LogOut(r.Context(), &iauth.Cookie{Cookie: cookie})
 	if err != nil {
 		rw.WriteHeader(http.StatusForbidden)
 	} else {
@@ -76,16 +74,7 @@ func (ap API) LogOut(rw http.ResponseWriter, r *http.Request) {
 }
 
 func (ap API) MyProfile(rw http.ResponseWriter, r *http.Request) {
-	cookie := cookies.GetSessionCookie(r)
-	status, err := ap.authMs.IsLoggedIn(r.Context(), &iauth.Cookie{
-		Cookie: cookie,
-	})
-	if err != nil || !status.BOK {
-		rw.WriteHeader(http.StatusForbidden)
-		return
-	}
-
-	user, err := ap.db.GetProfile(status.Uid)
+	user, err := ap.db.GetProfile(ap.getUID(r))
 	payload, err := user.MarshalJSON()
 	if err != nil {
 		ap.Logger().Errorf("Unexpected error during marshaling: %s", err.Error())
