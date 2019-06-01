@@ -14,7 +14,7 @@ type corsConfig struct {
 	Headers     []string `json:"headers"`
 	Methods     []string `json:"methods"`
 	Credentials bool     `json:"credentials"`
-	OptionsPass bool     `json:"optionspass"`
+	OptionsPass bool     `json:"option_pass"`
 }
 
 // Cors - cors middleware
@@ -28,7 +28,7 @@ func Cors(sv service.IService) IMiddleware {
 		AllowCredentials:   config.Credentials,
 		AllowedOrigins:     config.Origins,
 		AllowedHeaders:     config.Headers,
-		AllowedMethods:     config.Headers,
+		AllowedMethods:     config.Methods,
 	})
 	return func(next http.HandlerFunc) http.HandlerFunc {
 		handler := cors.Handler(http.HandlerFunc(next))

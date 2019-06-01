@@ -107,7 +107,7 @@ func easyjson5822a332DecodeWaveInternalMiddlewares(in *jlexer.Lexer, out *corsCo
 			}
 		case "credentials":
 			out.Credentials = bool(in.Bool())
-		case "optionspass":
+		case "option_pass":
 			out.OptionsPass = bool(in.Bool())
 		default:
 			in.SkipRecursive()
@@ -197,7 +197,7 @@ func easyjson5822a332EncodeWaveInternalMiddlewares(out *jwriter.Writer, in corsC
 		out.Bool(bool(in.Credentials))
 	}
 	{
-		const prefix string = ",\"optionspass\":"
+		const prefix string = ",\"option_pass\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])

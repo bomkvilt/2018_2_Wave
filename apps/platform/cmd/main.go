@@ -31,8 +31,10 @@ func main() {
 
 	r.HandleFunc("/users", mw.Pipe(s.SugnUp, public)).Methods("POST")
 	r.HandleFunc("/users/me", mw.Pipe(s.MyProfile, common)).Methods("GET")
-	r.HandleFunc("/session", mw.Pipe(s.LogIn, common)).Methods("POST")
+	r.HandleFunc("/users/me", mw.Pipe(s.Dummy, public)).Methods("OPTIONS")
+	r.HandleFunc("/session", mw.Pipe(s.LogIn, public)).Methods("POST")
 	r.HandleFunc("/session", mw.Pipe(s.LogOut, common)).Methods("DELETE")
+	r.HandleFunc("/session", mw.Pipe(s.Dummy, public)).Methods("OPTIONS")
 
 	r.HandleFunc("/apps", mw.Pipe(s.GetApps, common)).Methods("GET")
 	r.HandleFunc("/apps/categories", mw.Pipe(s.GetAppCategories, common)).Methods("GET")

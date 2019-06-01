@@ -33,6 +33,14 @@ func (ap API) GetPort() string {
 	return ap.conf.Port
 }
 
+// --------------------------|
+
+func (ap API) Dummy(rw http.ResponseWriter, r *http.Request) {
+	// It's just a gap insight....
+}
+
+// --------------------------|
+
 func (ap API) getAuth(r *http.Request) iauth.IAuthClient {
 	ms, ok := middlewares.GetAuth(r)
 	if !ok {
