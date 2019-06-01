@@ -17,7 +17,78 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson5822a332DecodeWaveAppsPlatform(in *jlexer.Lexer, out *configDB) {
+func easyjson5822a332DecodeWaveAppsPlatform(in *jlexer.Lexer, out *ctgsCrutch) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "categories":
+			(out.Categories).UnmarshalEasyJSON(in)
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson5822a332EncodeWaveAppsPlatform(out *jwriter.Writer, in ctgsCrutch) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"categories\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(in.Categories).MarshalEasyJSON(out)
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v ctgsCrutch) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson5822a332EncodeWaveAppsPlatform(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v ctgsCrutch) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson5822a332EncodeWaveAppsPlatform(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *ctgsCrutch) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson5822a332DecodeWaveAppsPlatform(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *ctgsCrutch) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson5822a332DecodeWaveAppsPlatform(l, v)
+}
+func easyjson5822a332DecodeWaveAppsPlatform1(in *jlexer.Lexer, out *configDB) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -56,7 +127,7 @@ func easyjson5822a332DecodeWaveAppsPlatform(in *jlexer.Lexer, out *configDB) {
 		in.Consumed()
 	}
 }
-func easyjson5822a332EncodeWaveAppsPlatform(out *jwriter.Writer, in configDB) {
+func easyjson5822a332EncodeWaveAppsPlatform1(out *jwriter.Writer, in configDB) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -116,27 +187,98 @@ func easyjson5822a332EncodeWaveAppsPlatform(out *jwriter.Writer, in configDB) {
 // MarshalJSON supports json.Marshaler interface
 func (v configDB) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson5822a332EncodeWaveAppsPlatform(&w, v)
+	easyjson5822a332EncodeWaveAppsPlatform1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v configDB) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson5822a332EncodeWaveAppsPlatform(w, v)
+	easyjson5822a332EncodeWaveAppsPlatform1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *configDB) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson5822a332DecodeWaveAppsPlatform(&r, v)
+	easyjson5822a332DecodeWaveAppsPlatform1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *configDB) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson5822a332DecodeWaveAppsPlatform(l, v)
+	easyjson5822a332DecodeWaveAppsPlatform1(l, v)
 }
-func easyjson5822a332DecodeWaveAppsPlatform1(in *jlexer.Lexer, out *Config) {
+func easyjson5822a332DecodeWaveAppsPlatform2(in *jlexer.Lexer, out *appsCrutch) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "apps":
+			(out.Apps).UnmarshalEasyJSON(in)
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson5822a332EncodeWaveAppsPlatform2(out *jwriter.Writer, in appsCrutch) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"apps\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(in.Apps).MarshalEasyJSON(out)
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v appsCrutch) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson5822a332EncodeWaveAppsPlatform2(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v appsCrutch) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson5822a332EncodeWaveAppsPlatform2(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *appsCrutch) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson5822a332DecodeWaveAppsPlatform2(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *appsCrutch) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson5822a332DecodeWaveAppsPlatform2(l, v)
+}
+func easyjson5822a332DecodeWaveAppsPlatform3(in *jlexer.Lexer, out *Config) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -169,7 +311,7 @@ func easyjson5822a332DecodeWaveAppsPlatform1(in *jlexer.Lexer, out *Config) {
 		in.Consumed()
 	}
 }
-func easyjson5822a332EncodeWaveAppsPlatform1(out *jwriter.Writer, in Config) {
+func easyjson5822a332EncodeWaveAppsPlatform3(out *jwriter.Writer, in Config) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -199,23 +341,23 @@ func easyjson5822a332EncodeWaveAppsPlatform1(out *jwriter.Writer, in Config) {
 // MarshalJSON supports json.Marshaler interface
 func (v Config) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson5822a332EncodeWaveAppsPlatform1(&w, v)
+	easyjson5822a332EncodeWaveAppsPlatform3(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Config) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson5822a332EncodeWaveAppsPlatform1(w, v)
+	easyjson5822a332EncodeWaveAppsPlatform3(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Config) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson5822a332DecodeWaveAppsPlatform1(&r, v)
+	easyjson5822a332DecodeWaveAppsPlatform3(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Config) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson5822a332DecodeWaveAppsPlatform1(l, v)
+	easyjson5822a332DecodeWaveAppsPlatform3(l, v)
 }
