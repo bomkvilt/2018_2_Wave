@@ -1,5 +1,5 @@
 TRUNCATE apps CASCADE;
--- TRUNCATE userapp CASCADE;
+TRUNCATE userapps CASCADE;
 
 INSERT INTO apps(link, name, image, about, category)
     VALUES (
